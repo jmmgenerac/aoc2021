@@ -1,6 +1,7 @@
 import argparse
 
-class Runner():
+
+class Runner:
     def __init__(self, input_file, test=False):
         self.input_file = input_file
         self.test = test
@@ -9,7 +10,7 @@ class Runner():
 
     def read_input(self):
         with open(self.input_file, "r") as f:
-            data = [tuple(line.strip().split(' ')) for line in f.readlines()]
+            data = [tuple(line.strip().split(" ")) for line in f.readlines()]
         if self.test:
             print("\ndata:")
             for line in data:
@@ -17,20 +18,16 @@ class Runner():
         return data
 
     def process_data(self):
-        summary = {
-            "horizontal": 0,
-            "depth": 0,
-            "aim": 0
-        }
+        summary = {"horizontal": 0, "depth": 0, "aim": 0}
         for direction, value in self.data:
             if direction == "forward":
-                summary['horizontal'] += int(value)
+                summary["horizontal"] += int(value)
                 summary["depth"] += summary["aim"] * int(value)
             elif direction == "up":
-                summary['aim'] -= int(value)
+                summary["aim"] -= int(value)
             elif direction == "down":
-                summary['aim'] += int(value)
-        if self.test:            
+                summary["aim"] += int(value)
+        if self.test:
             print(f"\nsummary:\n{summary}")
 
         return summary
@@ -43,7 +40,7 @@ if __name__ == "__main__":
     if args.test:
         input_file = "test_input.txt"
     else:
-        input_file = "input.txt" 
+        input_file = "input.txt"
 
     runner = Runner(input_file, args.test)
     print(f"{runner.summary['depth'] * runner.summary['horizontal']}")

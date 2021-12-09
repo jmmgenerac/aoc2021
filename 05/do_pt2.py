@@ -34,10 +34,10 @@ class Grid:
                 while y != y2 + direction and x <= x2:
                     if self.test:
                         self.grid[y][x] += 1
-                    if not self.points.get((x,y)):
-                        self.points[(x,y)] = 0
-                    self.points[(x,y)] += 1
-                    if self.points[(x,y)] > 1:
+                    if not self.points.get((x, y)):
+                        self.points[(x, y)] = 0
+                    self.points[(x, y)] += 1
+                    if self.points[(x, y)] > 1:
                         if self.test:
                             print(f"Adding diagonal point {(x,y)}")
                         self.intersections.add((x, y))
@@ -47,12 +47,12 @@ class Grid:
                 # horizontal or vertical lines
                 for y in range(y_start, y_end):
                     for x in range(x_start, x_end):
-                        if not self.points.get((x,y)):
-                            self.points[(x,y)] = 0
-                        self.points[(x,y)] += 1
+                        if not self.points.get((x, y)):
+                            self.points[(x, y)] = 0
+                        self.points[(x, y)] += 1
                         if self.test:
                             self.grid[y][x] += 1
-                        if self.points[(x,y)] > 1:
+                        if self.points[(x, y)] > 1:
                             self.intersections.add((x, y))
 
         except Exception as ex:

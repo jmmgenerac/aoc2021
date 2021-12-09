@@ -1,6 +1,7 @@
 import argparse
 
-class Runner():
+
+class Runner:
     def __init__(self, input_file, test=False):
         self.input_file = input_file
         self.test = test
@@ -19,7 +20,7 @@ class Runner():
         cnt = 0
         increases = []
         for i in range(1, len(data)):
-            increase = data[i] > data[i-1]
+            increase = data[i] > data[i - 1]
             if self.test:
                 print(f"{data[i]} > {data[i-1]}: {increase}")
             increases.append(increase)
@@ -44,6 +45,7 @@ class Runner():
             windows.append(window_sum)
         return windows
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--test", action="store_true")
@@ -51,6 +53,6 @@ if __name__ == "__main__":
     if args.test:
         input_file = "test_input.txt"
     else:
-        input_file = "input.txt" 
+        input_file = "input.txt"
 
     runner = Runner(input_file, args.test)

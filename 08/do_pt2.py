@@ -1,5 +1,5 @@
 import argparse
-import json
+from timeit import default_timer as timer
 
 
 class Display:
@@ -73,7 +73,10 @@ class Display:
                 if unlit_1 in segments_by_digit[4] and unlit_2 in segments_by_digit[4]:
                     digit = 2
                 else:
-                    if unlit_1 not in segments_by_digit[1] and unlit_2 not in segments_by_digit[1]:
+                    if (
+                        unlit_1 not in segments_by_digit[1]
+                        and unlit_2 not in segments_by_digit[1]
+                    ):
                         digit = 3
                     else:
                         digit = 5
@@ -86,7 +89,9 @@ class Display:
                 else:
                     digit = 6
             else:
-                raise ValueError(f"something went wrong: bad keylen for {segments}: {keylen}")
+                raise ValueError(
+                    f"something went wrong: bad keylen for {segments}: {keylen}"
+                )
 
             digit_by_segments[segments] = digit
             segments_by_digit[digit] = segments
@@ -104,18 +109,16 @@ class Runner:
         data = []
         with open(self.input_file, "r") as f:
             for line in f.readlines():
-                key_raw, patterns_raw = line.strip().split('|')
+                key_raw, patterns_raw = line.strip().split("|")
                 key_raw = key_raw.strip()
                 patterns_raw = patterns_raw.strip()
-                key = key_raw.split(' ')
+                key = key_raw.split(" ")
                 patterns = patterns_raw.split(" ")
                 data.append((key, patterns))
         return data
 
-
     def process_data(self):
-        summary = {"standalones": 0,
-                    "total_value": 0}
+        summary = {"standalones": 0, "total_value": 0}
         for key, patterns in self.data:
             display = Display(key, patterns, test=self.test)
             value = display.get_value()
@@ -127,8 +130,9 @@ class Runner:
                 print(f"{summary['total_value']}")
         return summary
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser('Day 07: crab submarines')
+    parser = argparse.ArgumentParser("Day 08: Seven Segment Search")
     parser.add_argument("--test", action="store_true")
     parser.add_argument("--input_file")
     args = parser.parse_args()
@@ -139,6 +143,7 @@ if __name__ == "__main__":
     else:
         input_file = "input.txt"
 
+    start = timer()
     runner = Runner(input_file, args.test)
-
     print(f"{runner.process_data()}")
+    print(f"runtime: {timer() - start}")

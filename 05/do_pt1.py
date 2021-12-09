@@ -2,11 +2,9 @@ import argparse
 import json
 
 
-
-
 class Grid:
     def __init__(self, max_x, max_y):
-        self.grid = [[0 for x in range(max_x+1)] for y in range(max_y+1)]
+        self.grid = [[0 for x in range(max_x + 1)] for y in range(max_y + 1)]
         self.intersections = set([])
 
     def draw_line(self, point_pair):
@@ -15,15 +13,15 @@ class Grid:
             if x1 != x2 and y1 != y2:
                 return
             x_start = min(x1, x2)
-            x_end = max(x1,x2) + 1
-            y_start = min(y1,y2)
-            y_end = max(y1,y2) + 1
+            x_end = max(x1, x2) + 1
+            y_start = min(y1, y2)
+            y_end = max(y1, y2) + 1
 
             for y in range(y_start, y_end):
                 for x in range(x_start, x_end):
                     self.grid[y][x] += 1
                     if self.grid[y][x] > 1:
-                        self.intersections.add((x,y))
+                        self.intersections.add((x, y))
         except Exception as ex:
             print(f"Exception drawing point pair {point_pair}")
             print(f"grid dims: {len(self.grid[0])}, {len(self.grid)}")
@@ -36,7 +34,6 @@ class Grid:
                 ret += "\n"
             ret += "".join(["." if x == 0 else str(x) for x in row])
         return ret
-
 
 
 class Runner:
@@ -91,7 +88,6 @@ class Runner:
             print(self.grid)
             print(self.grid.intersections)
         return len(self.grid.intersections)
-        
 
 
 if __name__ == "__main__":

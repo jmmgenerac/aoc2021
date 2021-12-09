@@ -15,6 +15,7 @@ class Display:
                 ret += 1
         return ret
 
+
 class Runner:
     def __init__(self, input_file, test=False):
         self.input_file = input_file
@@ -26,12 +27,11 @@ class Runner:
         data = []
         with open(self.input_file, "r") as f:
             for line in f.readlines():
-                key_raw, patterns_raw = line.strip().split('|')
-                key = key_raw.split(' ')
+                key_raw, patterns_raw = line.strip().split("|")
+                key = key_raw.split(" ")
                 patterns = patterns_raw.split(" ")
                 data.append((key, patterns))
         return data
-
 
     def is_8(self, input):
         return len(input) == 7
@@ -46,8 +46,9 @@ class Runner:
                 print(f"{num_standalones}: raw_display: {patterns}")
         return summary
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser('Day 07: crab submarines')
+    parser = argparse.ArgumentParser("Day 08: Seven Segment Search")
     parser.add_argument("--test", action="store_true")
     parser.add_argument("--input_file")
     args = parser.parse_args()

@@ -1,10 +1,13 @@
 import argparse
 import json
 
+
 class Bingo(int):
     """Stores the score of the winning board"""
+
     def __init__(self, score):
         self.score = score
+
 
 class Row:
     NOT_FOUND = 0
@@ -25,6 +28,7 @@ class Row:
             if self.values_remaining == []:
                 self.bingo = True
         return ret
+
 
 class Board:
     def __init__(self, raw_board):
@@ -84,9 +88,7 @@ class Runner:
                 board_raw["rows"].append(tuple(row))
                 nrows = len(board_raw["rows"])
                 if row and nrows == len(row):
-                    board_raw["cols"] = self.get_cols_from_rows(
-                        board_raw["rows"]
-                    )
+                    board_raw["cols"] = self.get_cols_from_rows(board_raw["rows"])
                     data["boards"].append(Board(board_raw))
 
         if self.test:

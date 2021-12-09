@@ -12,7 +12,7 @@ class Runner:
 
     def read_input(self):
         with open(self.input_file, "r") as f:
-            data = [int(n) for n in  f.read().strip().split(',')]
+            data = [int(n) for n in f.read().strip().split(",")]
         if self.test:
             print(data)
 
@@ -29,7 +29,7 @@ class Runner:
     def get_dists(self, a):
         dists = []
         for x in self.data:
-            fuel = self.calc_fuel(abs(x-a))
+            fuel = self.calc_fuel(abs(x - a))
             dists.append(fuel)
         return sum(dists), dists
 
@@ -40,18 +40,16 @@ class Runner:
         optimal_spot = None
         for i in range(min(self.data), max(self.data) + 1):
             total_fuel, dists = self.get_dists(i)
-            self.summary[i] = {
-                "dists": dists,
-                "fuel": total_fuel
-            }
+            self.summary[i] = {"dists": dists, "fuel": total_fuel}
             if min_fuel is None or total_fuel < min_fuel:
                 min_fuel = total_fuel
                 min_dists = dists
                 optimal_spot = i
         return optimal_spot, min_fuel
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser('Day 07: crab submarines')
+    parser = argparse.ArgumentParser("Day 07: crab submarines")
     parser.add_argument("--test", action="store_true")
     parser.add_argument("--input_file")
     args = parser.parse_args()
